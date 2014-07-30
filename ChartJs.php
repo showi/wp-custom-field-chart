@@ -1,4 +1,19 @@
 <?php
+/*
+ Copyright (c) 2014 Joachim Basmaison
+
+This program is free software; you can redistribute it
+and/or modify it under the terms of the GNU General Public
+License as published by the Free Software Foundation;
+either version 2 of the License, or (at your option) any
+later version.
+
+This program is distributed in the hope that it will be
+useful, but WITHOUT ANY WARRANTY; without even the implied
+warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR
+PURPOSE. See the GNU General Public License for more
+details.
+*/
 
 namespace WpCustomFieldChart;
 
@@ -20,8 +35,10 @@ class ChartJs {
 	}
 
 	function gen_html($attr, $data, $options) {
-		return $this->gen_canvas($attr) . $this->gen_script($attr, $data,
-				$options);		
+		return '<div class="' . $attr['class'] . '">' . 
+			$this->gen_canvas($attr) . 
+			$this->gen_script($attr, $data, $options) .
+			'</div>';		
 	}
 
 	function gen_canvas($attr) {
@@ -34,27 +51,27 @@ class ChartJs {
 	}
 
 	function gen_script($attr, $data, $options=Null) {
-		$vardata = $attr['jsvar_data'];
+		$vardata = $attr['js_data'];
 		$varopt = '{}';
 		$varobj = $this->sid . 'Object';
 		$out = "<script>\n";
 		$out .= 'jQuery(window).load(function() {' ."\n";
 		$out .= $this->gen_data($attr, $data);
-		if (key_exists('jsvar_options', $attr)) {
+		if (key_exists('js_options', $attr)) {
 			#$out .= $this->gen_options($attr, $options);
-			$varopt = $attr['jsvar_options'];
+			$varopt = $attr['js_options'];
 		}
 		$out .= "var ctx = document.getElementById(\"".$this->sid."\").getContext(\"2d\");\n";
 		$out .= "var $varobj = new Chart(ctx).".$attr['kind']."($vardata, $varopt);\n";
-		if (key_exists('jsfunc_hook', $attr)) {
-			$out .= $attr['jsfunc_hook'] . "($varobj);\n";
+		if (key_exists('js_hook', $attr)) {
+			$out .= $attr['js_hook'] . "($varobj);\n";
 		}
 		$out .= "});</script>\n";
 		return $out;
 	}
 
 	function gen_data($attr, $data) {
-		$vardata = $attr['jsvar_data'];
+		$vardata = $attr['js_data'];
 		$fields = split(',', $attr['fields']);
 		$out = $vardata.".labels=[" . join(',', $data['labels']) . "];\n";
 		foreach($fields as $idx => $name) {
@@ -71,7 +88,7 @@ class ChartJs {
 		if (is_null($options) || $options == '') {
 			return '';
 		}
-		$vardata = $attr['jsvar_options'];
+		$vardata = $attr['js_options'];
 		return "var $vardata=$options;\n";
 	}
 }
