@@ -37,7 +37,6 @@ include "ChartJs.php";
 include "Field.php";
 
 use WpCustomFieldChart\Field as Field;
-use WpCustomFieldChart;
 
 $CFC_FIELDS = array(
 	new Field('width', true, 400, '^\d+$', 'Chart width'),
