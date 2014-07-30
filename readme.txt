@@ -1,5 +1,5 @@
 === Plugin Name ===
-Contributors: (this should be a list of wordpress.org userid's)
+Contributors: showi
 Donate link: 
 Tags: custom field, chart, javascript
 Requires at least: 3.9.1
@@ -22,14 +22,6 @@ Upload zip from admin extension or use wordpress directory
 (searching wp-custom-field-chart)
 
 == Frequently Asked Questions ==
-
-= A question that someone might have =
-
-An answer to that question.
-
-= What about foo bar? =
-
-Answer to foo bar dilemma.
 
 == Screenshots ==
 
