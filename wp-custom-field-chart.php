@@ -54,9 +54,10 @@ $CFC_FIELDS = array(
 	    'Aggregation method: track, cumulative, delta'),
 	new Field('interval', true, 'month', '^(year|month|day)$',
 	    'Period: year, month, day'),
-	new Field('interval_count', true, 12, '^\d+$', 'Interval count'),
+	new Field('interval_count', true, 6, '^\d+$', 'Interval count'),
 	new Field('class', true, 'cfc-chart', '^[\w\d-_]+$',
-	    'Class used for our HTML div element')
+	    'Class used for our HTML div element'),
+    new Field('to_date', false)
 );
 
 /************************
@@ -108,14 +109,14 @@ function cfc_collect_data($atts)
     global $wp_query;
 
     // $atts = wp_parse_args($atts);
-    $defaults = array(
-        'interval_count' => '6',
-        'chs' => '200x200',
-        'cht' => 'bvs'
-    );
-    $atts = array_merge($defaults, $atts);
-    if (! isset($atts['fields']))
-        return 'Tally Graph: required parameter "key" is missing.';
+//     $defaults = array(
+//         'interval_count' => '6',
+//         'chs' => '200x200',
+//         'cht' => 'bvs'
+//     );
+//     $atts = array_merge($defaults, $atts);
+//     if (! isset($atts['fields']))
+//         return 'Tally Graph: required parameter "key" is missing.';
 
         // Extract non-chart variables from attributes
     $keys = split(',', $atts['fields']);
