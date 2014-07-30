@@ -88,7 +88,7 @@ class ChartJs
         $fields = split(',', $attr['fields']);
         $out = $vardata . ".labels=[" .
             join(',',
-                array_map(function($e) { return '"'.$e.'"'; },
+                array_map(function($e) { return '"'.$e.'"'; }),
                 $data['labels']) .
             "];\n";
         foreach ($fields as $idx => $name) {
