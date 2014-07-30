@@ -86,7 +86,7 @@ class ChartJs
     {
         $vardata = $attr['js_data'];
         $fields = split(',', $attr['fields']);
-        $out = $vardata . ".labels=[" . join(',', $data['labels']) . "];\n";
+        $out = $vardata . ".labels=[" . join(',', '"'.$data['labels'].'"') . "];\n";
         foreach ($fields as $idx => $name) {
             $out .= $vardata . ".datasets[$idx].data=[";
             foreach ($data['datasets'][$idx] as $key => $value) {
