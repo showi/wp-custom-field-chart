@@ -41,7 +41,8 @@ use WpCustomFieldChart\Field as Field;
 $CFC_FIELDS = array(
 	new Field('width', true, 400, '^\d+$', 'Chart width'),
 	new Field('height', true, 200, '^\d+$', 'Chart height'),
-	new Field('kind', true, 'Line', '^(Line)$', 'Kind of chart: Line, Bar'),
+	new Field('kind', true, 'Line', '^(Line|Bar)$', 'Kind of chart: Line, Bar',
+        function($e) { return ucfirst(strtolower($e)); }),
 	new Field('js_data', true, Null, '^\w[\w\d_]+$',
 	    'Javascript variable holding our chart datasets'),
 	new Field('js_option', false, Null, '^\w[\w\d_]+$',

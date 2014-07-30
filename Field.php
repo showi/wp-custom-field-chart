@@ -17,15 +17,17 @@ class Field
     public $default = Null;
     public $match = Null;
     public $info = Null;
+    public $callback = Null;
 
     function __construct($name, $required, $default = Null, $match = Null,
-        $info = Null)
+        $info = Null, $callback=Null)
     {
         $this->name = $name;
         $this->required = $required;
         $this->default = $default;
         $this->match = $match;
         $this->info = $info;
+        $this->callback = $callback;
     }
 
     function validate($value)
@@ -38,6 +40,10 @@ class Field
                 throw new ErrorMissingAttribute($this->name);
             }
             return $this->default;
+        }
+        $cb = $this->callback;
+        if (!is_null($cb)) {
+            $value = $cb($value);
         }
         return $value;
     }
